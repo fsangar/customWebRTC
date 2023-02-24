@@ -1,0 +1,50 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 5px;
+}
+input, button {
+    padding: 5px;
+    border-radius: 5px;
+}
+button {
+    cursor: pointer;
+}
+
+label.info {
+    min-width: 100px;
+    display: inline-block;
+}
+
+.configMenu {
+    border-radius: 5px;
+    background-color: lightseagreen;
+    padding: 5px;
+}
+
+.configCall {
+    display: inline-block;
+    border-right: 1px solid #aaaaaa;
+    padding: 0 10px;
+    height: 100%;
+    vertical-align: top;
+}
+
+.configCall p {
+    padding: 5px;
+}
+
+video {
+    margin: 10px;
+    max-width: 40vw;
+    width: 600px;
+    height: 400px;
+    max-height: 60vh;
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid lightseagreen;
+}
