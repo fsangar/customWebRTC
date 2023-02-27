@@ -3,7 +3,7 @@ from aiortc import RTCPeerConnection, RTCSessionDescription
 import websockets
 
 # URLS
-urlWS = 'ws://api-rest-teleasistencia-p1.iesvjp.es:9999'
+urlWS = 'wss://api-rest-teleasistencia-p1.iesvjp.es:9999'
 # Configurar el servidor TURN
 turn_server = {
     'urls': 'teleasistencia.iesvjp.es:3478',
