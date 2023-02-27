@@ -1,6 +1,6 @@
 import asyncio
 from aiortc import RTCPeerConnection, RTCSessionDescription
-import websocket
+import websockets
 import ssl
 
 # URLS
