@@ -1,11 +1,10 @@
 import asyncio
 from aiortc import RTCPeerConnection, RTCSessionDescription
-import websockets
+import websocket
 import ssl
-import certifi
 
 # URLS
-urlWS = 'ws://api-rest-teleasistencia-p1.iesvjp.es:9998'
+urlWS = 'wss://api-rest-teleasistencia-p1.iesvjp.es:9999'
 # Configurar el servidor TURN
 turn_server = {
     'urls': 'teleasistencia.iesvjp.es:3478',
@@ -22,12 +21,15 @@ async def on_track(track):
 async def connect():
      print("---  Conexión  --- ")
      # Conectarse al servidor WebSocket
+     #async with websockets.connect(urlWS, sslopt={"cert_reqs": ssl.CERT_NONE}) as websocket:
+     #async with websocket.create_connection(urlWS,sslopt={"cert_reqs": ssl.CERT_NONE}) as ws:
+     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+     ssl_context.check_hostname = False
+     ssl_context.verify_mode = ssl.CERT_NONE
 
-     ssl_context = ssl.create_default_context()
-     ssl_context.load_verify_locations(certifi.where())
 
-     async with websockets.connect(urlWS, ssl=ssl_context) as websocket:
-
+     ws = websocket.WebSocket(sslopt={"cert_reqs": ssl.CERT_NONE})
+     async with ws.connect(urlWS, ssl_context=ssl_context):
          print("---  Conectado al WebSocket  --- ")
          # Crear un objeto RTCPeerConnection
          pc = RTCPeerConnection()
