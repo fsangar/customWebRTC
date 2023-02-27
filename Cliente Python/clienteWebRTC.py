@@ -23,9 +23,10 @@ async def connect():
      # Conectarse al servidor WebSocket
      #async with websockets.connect(urlWS, sslopt={"cert_reqs": ssl.CERT_NONE}) as websocket:
      #async with websocket.create_connection(urlWS,sslopt={"cert_reqs": ssl.CERT_NONE}) as ws:
-     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-     ssl_context.check_hostname = False
-     ssl_context.verify_mode = ssl.CERT_NONE
+
+     #ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+     #ssl_context.check_hostname = False
+     #ssl_context.verify_mode = ssl.CERT_NONE
 
 
      ws = websocket.WebSocket(sslopt={"cert_reqs": ssl.CERT_NONE})
