@@ -2,7 +2,6 @@ import asyncio
 from aiortc import RTCPeerConnection, RTCSessionDescription
 import websockets
 import ssl
-import pathlib
 
 # URLS
 urlWS = 'wss://api-rest-teleasistencia-p1.iesvjp.es:9999'
@@ -23,10 +22,7 @@ async def connect():
      print("---  Conexión  --- ")
      # Conectarse al servidor WebSocket
 
-     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-     localhost_pem = pathlib.Path(__file__).with_name("certficado_iesvjp.pem")
-     ssl_context.load_verify_locations(localhost_pem)
-     async with websockets.connect(urlWS, ssl=ssl_context) as websocket:
+     async with websockets.connect(urlWS) as websocket:
          print("---  Conectado al WebSocket  --- ")
          # Crear un objeto RTCPeerConnection
          pc = RTCPeerConnection()
