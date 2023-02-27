@@ -1,6 +1,6 @@
 import asyncio
 from aiortc import RTCPeerConnection, RTCSessionDescription
-import websocket
+import websockets
 import ssl
 
 # URLS
@@ -21,15 +21,11 @@ async def on_track(track):
 async def connect():
      print("---  Conexión  --- ")
      # Conectarse al servidor WebSocket
-     #async with websockets.connect(urlWS, sslopt={"cert_reqs": ssl.CERT_NONE}) as websocket:
-     #async with websocket.create_connection(urlWS,sslopt={"cert_reqs": ssl.CERT_NONE}) as ws:
-     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-     ssl_context.check_hostname = False
-     ssl_context.verify_mode = ssl.CERT_NONE
 
-
-     ws = websocket.WebSocket(sslopt={"cert_reqs": ssl.CERT_NONE})
-     async with ws.connect(urlWS):
+     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+     localhost_pem = pathlib.Path(__file__).with_name("certficado_iesvjp.pem")
+     ssl_context.load_verify_locations(localhost_pem)
+     async with websockets.connect(urlWS, ssl=ssl_context) as websocket:
          print("---  Conectado al WebSocket  --- ")
          # Crear un objeto RTCPeerConnection
          pc = RTCPeerConnection()
