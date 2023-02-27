@@ -1,6 +1,8 @@
 import asyncio
 from aiortc import RTCPeerConnection, RTCSessionDescription
 import websockets
+import ssl
+import certifi
 
 # URLS
 urlWS = 'wss://api-rest-teleasistencia-p1.iesvjp.es:9999'
