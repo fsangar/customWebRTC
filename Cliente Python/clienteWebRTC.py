@@ -1,6 +1,6 @@
 import asyncio
 from aiortc import RTCPeerConnection, RTCSessionDescription
-import websockets
+import websocket
 import ssl
 
 # URLS
@@ -26,7 +26,7 @@ async def connect():
                                    on_open=on_open,
                                    on_message=on_message,
                                    on_error=on_error,
-                                   on_close=on_close) as websocket:
+                                   on_close=on_close) as ws:
          print("---  Conectado al WebSocket  --- ")
          # Crear un objeto RTCPeerConnection
          pc = RTCPeerConnection()
@@ -35,9 +35,9 @@ async def connect():
          await pc.setLocalDescription(await pc.createOffer())
          offer = {'type': pc.localDescription.type, 'sdp': pc.localDescription.sdp}
          # Enviar la oferta al servidor WebSocket
-         await websocket.send(offer)
+         await ws.send(offer)
          # Esperar la respuesta del servidor WebSocket
-         response = await websocket.recv()
+         response = await ws.recv()
          answer = {'type': RTCSessionDescription.ANSWER, 'sdp': response}
          # Configurar el objeto RTCSessionDescription remoto
          await pc.setRemoteDescription(RTCSessionDescription(answer['sdp'], answer['type']))
