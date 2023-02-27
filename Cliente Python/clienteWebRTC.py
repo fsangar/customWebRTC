@@ -22,11 +22,7 @@ async def connect():
      print("---  Conexión  --- ")
      # Conectarse al servidor WebSocket
      #async with websockets.connect(urlWS, sslopt={"cert_reqs": ssl.CERT_NONE}) as websocket:
-     async with websocket.WebSocketApp(urlWS,
-                                   on_open=on_open,
-                                   on_message=on_message,
-                                   on_error=on_error,
-                                   on_close=on_close) as ws:
+     async with websocket.create_connection(urlWS) as ws:
          print("---  Conectado al WebSocket  --- ")
          # Crear un objeto RTCPeerConnection
          pc = RTCPeerConnection()
