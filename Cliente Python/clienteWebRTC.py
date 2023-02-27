@@ -17,10 +17,23 @@ async def on_track(track):
     pc.addTrack(track)
     await asyncio.gather(send_audio(pc),send_video(pc))
 
+
+
 async def connect():
      print("---  Conexión  --- ")
      # Conectarse al servidor WebSocket
-     async with websockets.connect(urlWS) as websocket:
+     # SSL
+     ssl_context = ssl.create_default_context()
+     ssl_context.load_verify_locations(certifi.where())
+     query =  {
+        "jsonrpc": "2.0",
+        "method": "queryHeadsets",
+        "params": {},
+        "id": 1
+        }
+     json = json.dumps(query)
+
+     async with websockets.connect(urlWS, ssl=ssl_context) as websocket:
          print("---  Conectado al WebSocket  --- ")
          # Crear un objeto RTCPeerConnection
          pc = RTCPeerConnection()
