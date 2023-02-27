@@ -3,7 +3,6 @@ from aiortc import RTCPeerConnection, RTCSessionDescription
 import websockets
 import ssl
 import certifi
-import json
 
 # URLS
 urlWS = 'wss://api-rest-teleasistencia-p1.iesvjp.es:9999'
@@ -20,21 +19,12 @@ async def on_track(track):
     pc.addTrack(track)
     await asyncio.gather(send_audio(pc),send_video(pc))
 
-
-
 async def connect():
      print("---  Conexión  --- ")
      # Conectarse al servidor WebSocket
      # SSL
      ssl_context = ssl.create_default_context()
      ssl_context.load_verify_locations(certifi.where())
-     query =  {
-        "jsonrpc": "2.0",
-        "method": "queryHeadsets",
-        "params": {},
-        "id": 1
-        }
-     json = json.dumps(query)
 
      async with websockets.connect(urlWS, ssl=ssl_context) as websocket:
          print("---  Conectado al WebSocket  --- ")
