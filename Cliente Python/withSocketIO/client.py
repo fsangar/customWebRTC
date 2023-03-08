@@ -21,8 +21,8 @@ turn_server = {
 ssl_context = ssl.create_default_context()
 ssl_context.load_verify_locations('certficado_iesvjp.pem')
 connector = aiohttp.TCPConnector(ssl=ssl_context)
-await http_session = aiohttp.ClientSession(connector=connector)
-sio = socketio.AsyncClient(http_session=http_session)
+http_session = aiohttp.ClientSession(connector=connector)
+await sio = socketio.AsyncClient(http_session=http_session)
 
 @sio.event
 def message(data):
