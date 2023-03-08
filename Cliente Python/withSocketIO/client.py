@@ -15,7 +15,7 @@ turn_server = {
     'username': 'test',
     'credential': 'test'
 }
-CERTIFICADO_RUTA = 'certficado_iesvjp.pem'
+CERTIFICADO_RUTA = 'iesvjp.es_ssl_certificate.cer'
 
 
 # async Python
