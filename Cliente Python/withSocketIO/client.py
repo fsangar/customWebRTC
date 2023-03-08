@@ -21,7 +21,6 @@ CERTIFICADO_RUTA = '/usr/local/share/ca-certificates/'
 http_session = requests.Session()
 http_session.verify = CERTIFICADO_RUTA
 sio = socketio.Client(http_session=http_session)
-sio.connect(SIGNALING_SERVER_URL)
 
 @sio.event
 def message(data):
@@ -95,3 +94,5 @@ async def send_video(pc):
 if __name__ == '__main__':
     asyncio.run(main()) """
 
+
+sio.connect(SIGNALING_SERVER_URL)
