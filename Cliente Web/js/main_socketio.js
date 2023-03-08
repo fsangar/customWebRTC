@@ -174,13 +174,6 @@ let onAddStream = (event) => {
 };
 
 let handleSignalingData = (data) => {
-
-    //Añadimos esto para el ejemplo de WS creado en django
-    console.log(data);
-    /*    console.log(data.data);
-        data = JSON.parse(data.data);*/
-
-    // Esto funcionaría usando el ejemplo que nos dan
     switch (data.type) {
         case 'offer':
             createPeerConnection();
