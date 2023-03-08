@@ -44,7 +44,7 @@ const PC_CONFIG = {
 };
 
 //Uso de audio y/o vídeo.
-let audioVideo = { audio: true, video: true }
+let audioVideo = { audio: true, video: false }
 let joinRoom = document.querySelector("#joinRoom");
 let video = document.querySelector("input[name=video]:checked").value;
 
