@@ -90,8 +90,9 @@ async def send_video(pc):
      video = await pc.getUserMedia({"video": True})
      pc.addTrack(video.getVideoTracks()[0])
 
-def main():
+""" def main():
+    sio.connect(SIGNALING_SERVER_URL)
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    asyncio.run(main()) """
 
