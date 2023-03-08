@@ -6,9 +6,8 @@ import ssl
 import aiohttp
 
 # URLS
-SIGNALING_SERVER_URL = 'https://api-rest-teleasistencia-p1.iesvjp.es:9999';
+SIGNALING_SERVER_URL = 'http://api-rest-teleasistencia-p1.iesvjp.es:9999';
 
-urlWS = 'ws://api-rest-teleasistencia-p1.iesvjp.es:9999'
 # Configurar el servidor TURN
 turn_server = {
     'urls': 'teleasistencia.iesvjp.es:3478',
