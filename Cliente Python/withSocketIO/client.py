@@ -15,14 +15,15 @@ turn_server = {
     'username': 'test',
     'credential': 'test'
 }
+CERTIFICADO_RUTA = 'certficado_iesvjp.pem'
 
 
 # async Python
 ssl_context = ssl.create_default_context()
-ssl_context.load_verify_locations('certficado_iesvjp.pem')
+ssl_context.load_verify_locations(CERTIFICADO_RUTA)
 connector = aiohttp.TCPConnector(ssl=ssl_context)
 http_session = aiohttp.ClientSession(connector=connector)
-sio = socketio.connect(http_session=http_session)
+sio = socketio.AsyncClient(http_session=http_session)
 
 @sio.event
 def message(data):
