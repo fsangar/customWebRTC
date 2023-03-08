@@ -5,7 +5,7 @@
 /*
 const SIGNALING_SERVER_URL = 'https://api-rest-teleasistencia-p1.iesvjp.es:9999';
 */
-const SIGNALING_SERVER_URL = 'https://teleasistencia-cpr.iesvjp.es/ws/webRTC/room01/';
+const SIGNALING_SERVER_URL = 'wss://teleasistencia-cpr.iesvjp.es/ws/webRTC/room01/';
 /*
 const SIGNALING_SERVER_URL = 'http://localhost:8000/ws/webRTC/room01/';
 */
@@ -88,7 +88,7 @@ let getLocalStream = () => {
 
             /*socket.connect();*/
 
-            socket = new WebSocket("ws://localhost:8000/ws/webRTC/asdf/");
+            socket = new WebSocket(SIGNALING_SERVER_URL);
             socket.onopen = (data) => {
                 console.log('Data received: ',data);
                 handleSignalingData(data);
