@@ -6,7 +6,7 @@ import ssl
 import aiohttp
 
 # URLS
-SIGNALING_SERVER_URL = 'http://api-rest-teleasistencia-p1.iesvjp.es:9998';
+SIGNALING_SERVER_URL = 'https://api-rest-teleasistencia-p1.iesvjp.es:9999';
 
 # Configurar el servidor TURN
 turn_server = {
@@ -20,7 +20,7 @@ CERTIFICADO_RUTA = '/usr/local/share/ca-certificates/'
 # async Python
 http_session = requests.Session()
 http_session.verify = CERTIFICADO_RUTA
-sio = socketio.AsyncClient(http_session=http_session)
+sio = socketio.Client(http_session=http_session)
 
 @sio.event
 def message(data):
@@ -97,3 +97,4 @@ if __name__ == '__main__':
 
 
 sio.connect(SIGNALING_SERVER_URL)
+sio.wait()
