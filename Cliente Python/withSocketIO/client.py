@@ -19,7 +19,10 @@ CERTIFICADO_RUTA = '/usr/local/share/ca-certificates/'
 
 # async Python
 http_session = requests.Session()
+"""
 http_session.verify = CERTIFICADO_RUTA
+ """
+http_session.verify = False
 sio = socketio.Client(http_session=http_session)
 
 @sio.event
