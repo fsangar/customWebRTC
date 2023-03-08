@@ -25,7 +25,7 @@ def message(data):
     print('I received a message!')
 
 @sio.on('my message')
-def on_message(data):
+async def on_message(data):
     print('I received a message!')
     # Esperar la respuesta del servidor WebSocket
     response = data
