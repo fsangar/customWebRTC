@@ -3,6 +3,7 @@ import socketio
 import requests
 from aiortc import RTCPeerConnection, RTCSessionDescription
 import ssl
+import aiohttp
 
 # URLS
 SIGNALING_SERVER_URL = 'https://api-rest-teleasistencia-p1.iesvjp.es:9999';
