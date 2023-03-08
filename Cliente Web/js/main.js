@@ -4,8 +4,9 @@
 // Config variables: change them to point to your own servers
 /*
 const SIGNALING_SERVER_URL = 'https://api-rest-teleasistencia-p1.iesvjp.es:9999';
-*/
-const SIGNALING_SERVER_URL = 'http://teleasistencia-cpr.iesvjp.es/ws/webRTC/room01/';
+*//*
+const SIGNALING_SERVER_URL = 'http://teleasistencia-cpr.iesvjp.es/ws/webRTC/room01/';*/
+const SIGNALING_SERVER_URL = 'http://localhost:8000/ws/webRTC/room01/';
 //const TURN_SERVER_URL = 'api-rest-teleasistencia-p1.iesvjp.es:3478';
 //const TURN_SERVER_USERNAME = 'username';
 //const TURN_SERVER_CREDENTIAL = 'credential';
@@ -35,7 +36,7 @@ const PC_CONFIG = {
 };
 
 //Uso de audio y/o vídeo.
-let audioVideo = { audio: true, video: true }
+let audioVideo = { audio: true, video: false }
 let joinRoom = document.querySelector("#joinRoom");
 let video = document.querySelector("input[name=video]:checked").value;
 
@@ -43,6 +44,8 @@ let video = document.querySelector("input[name=video]:checked").value;
 /************************* Socket ******************/
 let socket;
 let sendData = (data) => {
+    console.log("Mensaje Enviado");
+    console.log(data);
     socket.send(data);
 };
 /*
