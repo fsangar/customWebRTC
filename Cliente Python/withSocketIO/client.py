@@ -95,5 +95,5 @@ async def main():
     await sio.connect(SIGNALING_SERVER_URL)
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    await asyncio.run(main())
 
