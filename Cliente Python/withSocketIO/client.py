@@ -6,7 +6,7 @@ import ssl
 import aiohttp
 
 # URLS
-SIGNALING_SERVER_URL = 'http://api-rest-teleasistencia-p1.iesvjp.es:9999';
+SIGNALING_SERVER_URL = 'https://api-rest-teleasistencia-p1.iesvjp.es:9999';
 
 # Configurar el servidor TURN
 turn_server = {
@@ -66,6 +66,7 @@ async def connect():
 @sio.event
 def connect_error(data):
     print("The connection failed!")
+    print(data);
 
 @sio.event
 def disconnect():
