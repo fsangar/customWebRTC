@@ -19,7 +19,7 @@ CERTIFICADO_RUTA = 'iesvjp.es_ssl_certificate.cer'
 
 
 # async Python
-http_session = request.Session()
+http_session = requests.Session()
 http_session.verify = False
 sio = socketio.Client(http_session=http_session)
 
