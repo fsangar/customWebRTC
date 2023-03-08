@@ -18,41 +18,41 @@ turn_server = {
 
 
 # async Python
-async def setParamsConnection(data):
+async def setParamsConnection():
     ssl_context = ssl.create_default_context()
     ssl_context.load_verify_locations('certficado_iesvjp.pem')
     connector = aiohttp.TCPConnector(ssl=ssl_context)
     http_session = aiohttp.ClientSession(connector=connector)
     sio = socketio.AsyncClient(http_session=http_session)
 
-@sio.event
-def message(data):
-    print('I received a message!')
+    @sio.event
+    def message(data):
+        print('I received a message!')
 
-@sio.on('my message')
-async def on_message(data):
-    print('I received a message!')
-    # Esperar la respuesta del servidor WebSocket
-    response = data
-    answer = {'type': RTCSessionDescription.ANSWER, 'sdp': response}
-    # Configurar el objeto RTCSessionDescription remoto
-    await pc.setRemoteDescription(RTCSessionDescription(answer['sdp'], answer['type']))
-    # Agregar un evento de escucha para la pista
-    pc.on("track", on_track)
-    # Esperar a que se cierre la conexión WebRTC
-    await pc.wait_closed()
+    @sio.on('my message')
+    async def on_message(data):
+        print('I received a message!')
+        # Esperar la respuesta del servidor WebSocket
+        response = data
+        answer = {'type': RTCSessionDescription.ANSWER, 'sdp': response}
+        # Configurar el objeto RTCSessionDescription remoto
+        await pc.setRemoteDescription(RTCSessionDescription(answer['sdp'], answer['type']))
+        # Agregar un evento de escucha para la pista
+        pc.on("track", on_track)
+        # Esperar a que se cierre la conexión WebRTC
+        await pc.wait_closed()
 
-@sio.event
-async def message(data):
-    print('I received a message!')
+    @sio.event
+    async def message(data):
+        print('I received a message!')
 
-@sio.on('*')
-def catch_all(event, data):
-    pass
+    @sio.on('*')
+    def catch_all(event, data):
+        pass
 
-@sio.on('*')
-async def catch_all(event, data):
-   pass
+    @sio.on('*')
+    async def catch_all(event, data):
+       pass
 
 @sio.event
 async def connect():
