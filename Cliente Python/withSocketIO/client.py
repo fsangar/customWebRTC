@@ -96,4 +96,4 @@ if __name__ == '__main__':
     asyncio.run(main()) """
 
 
-sio.connect(SIGNALING_SERVER_URL)
+await sio.connect(SIGNALING_SERVER_URL)
