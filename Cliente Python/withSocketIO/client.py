@@ -22,7 +22,6 @@ CERTIFICADO_RUTA = 'certficado_iesvjp.pem'
 http_session = requests.Session()
 http_session.verify = CERTIFICADO_RUTA
 sio = socketio.Client(http_session=http_session)
-sio.connect('https://example.com')
 
 @sio.event
 def message(data):
