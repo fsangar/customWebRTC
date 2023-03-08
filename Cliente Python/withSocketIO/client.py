@@ -19,11 +19,10 @@ CERTIFICADO_RUTA = 'certficado_iesvjp.pem'
 
 
 # async Python
-ssl_context = ssl.create_default_context()
-ssl_context.load_verify_locations(CERTIFICADO_RUTA)
-connector = aiohttp.TCPConnector(ssl=ssl_context)
-http_session = aiohttp.ClientSession(connector=connector)
-sio = socketio.AsyncClient(http_session=http_session)
+http_session = request.Session()
+http_session.verify = CERTIFICADO_RUTA
+sio = socketio.Client(http_session=http_session)
+sio.connect('https://example.com')
 
 @sio.event
 def message(data):
