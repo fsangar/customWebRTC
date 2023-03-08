@@ -15,12 +15,12 @@ turn_server = {
     'username': 'test',
     'credential': 'test'
 }
-CERTIFICADO_RUTA = 'iesvjp.es_ssl_certificate.cer'
+CERTIFICADO_RUTA = '/usr/local/share/ca-certificates/'
 
 
 # async Python
 http_session = requests.Session()
-http_session.verify = False
+http_session.verify = CERTIFICADO_RUTA
 sio = socketio.Client(http_session=http_session)
 
 @sio.event
