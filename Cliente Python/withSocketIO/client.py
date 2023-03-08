@@ -40,7 +40,7 @@ async def catch_all(event, data):
    pass
 
 @sio.event
-def connect():
+async def connect():
      print("---  Conectado al WebSocket  --- ")
      # Crear un objeto RTCPeerConnection
      pc = RTCPeerConnection()
