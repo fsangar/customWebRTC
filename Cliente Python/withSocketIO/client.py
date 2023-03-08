@@ -14,7 +14,7 @@ turn_server = {
     'username': 'test',
     'credential': 'test'
 }
-CERTIFICADO_RUTA = '/usr/local/share/ca-certificates/'
+CERTIFICADO_RUTA = 'certficado_iesvjp.pem'
 
 
 # async Python
@@ -100,4 +100,3 @@ if __name__ == '__main__':
 
 
 sio.connect(SIGNALING_SERVER_URL)
-sio.wait()
