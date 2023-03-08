@@ -30,7 +30,15 @@ const PC_CONFIG = {
             credential: TURN_SERVER_CREDENTIAL
         },
         {
+            urls: 'turn:ccff-ic.iesvalledeljerteplasencia.es:3478?transport=udp',
+            username: 'test',
+            credential: 'test'
+        },
+        {
             urls: STUN_SERVER_URL
+        },
+        {
+            urls: 'stun:stun.l.google.com:19302'
         }
     ]
 };
