@@ -18,11 +18,12 @@ turn_server = {
 
 
 # async Python
-ssl_context = ssl.create_default_context()
-ssl_context.load_verify_locations('certficado_iesvjp.pem')
-connector = aiohttp.TCPConnector(ssl=ssl_context)
-http_session = aiohttp.ClientSession(connector=connector)
-sio = socketio.AsyncClient(http_session=http_session)
+async def setParamsConnection(data):
+    ssl_context = ssl.create_default_context()
+    ssl_context.load_verify_locations('certficado_iesvjp.pem')
+    connector = aiohttp.TCPConnector(ssl=ssl_context)
+    http_session = aiohttp.ClientSession(connector=connector)
+    sio = socketio.AsyncClient(http_session=http_session)
 
 @sio.event
 def message(data):
@@ -91,6 +92,7 @@ async def send_video(pc):
      pc.addTrack(video.getVideoTracks()[0])
 
 async def main():
+    await setParamsConnection()
     await sio.connect(SIGNALING_SERVER_URL)
 
 if __name__ == '__main__':
