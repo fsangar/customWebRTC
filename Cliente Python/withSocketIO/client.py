@@ -16,8 +16,8 @@ turn_server = {
 
 
 # standard Python
-http_session = requests.Session()
-http_session.verify = False
+http_session = request.Session()
+http_session.verify = '/usr/local/share/ca-certificates/certficado_iesvjp.pem'
 sio = socketio.Client(http_session=http_session)
 
 @sio.event
