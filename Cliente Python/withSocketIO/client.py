@@ -27,6 +27,15 @@ def message(data):
 @sio.on('my message')
 def on_message(data):
     print('I received a message!')
+    # Esperar la respuesta del servidor WebSocket
+    response = data
+    answer = {'type': RTCSessionDescription.ANSWER, 'sdp': response}
+    # Configurar el objeto RTCSessionDescription remoto
+    await pc.setRemoteDescription(RTCSessionDescription(answer['sdp'], answer['type']))
+    # Agregar un evento de escucha para la pista
+    pc.on("track", on_track)
+    # Esperar a que se cierre la conexión WebRTC
+    await pc.wait_closed()
 
 @sio.event
 async def message(data):
@@ -50,16 +59,7 @@ async def connect():
      await pc.setLocalDescription(await pc.createOffer())
      offer = {'type': pc.localDescription.type, 'sdp': pc.localDescription.sdp}
      # Enviar la oferta al servidor WebSocket
-     await ws.send(offer)
-     # Esperar la respuesta del servidor WebSocket
-     response = await ws.recv()
-     answer = {'type': RTCSessionDescription.ANSWER, 'sdp': response}
-     # Configurar el objeto RTCSessionDescription remoto
-     await pc.setRemoteDescription(RTCSessionDescription(answer['sdp'], answer['type']))
-     # Agregar un evento de escucha para la pista
-     pc.on("track", on_track)
-     # Esperar a que se cierre la conexión WebRTC
-     await pc.wait_closed()
+     await sio.emit(offer)
 
 @sio.event
 def connect_error(data):
