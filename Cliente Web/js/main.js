@@ -2,11 +2,9 @@
 /************************* Variables de configuración ******************/
 
 // Config variables: change them to point to your own servers
-/*
-const SIGNALING_SERVER_URL = 'https://api-rest-teleasistencia-p1.iesvjp.es:9999';
-*/
+const SIGNALING_SERVER_URL = 'http://192.168.0.23:9999';
 /*const SIGNALING_SERVER_URL = 'wss://teleasistencia-cpr.iesvjp.es/ws/webRTC/room01/';*/
-const SIGNALING_SERVER_URL = 'ws://localhost:8000/ws/webRTC/room01/';
+/*const SIGNALING_SERVER_URL = 'ws://localhost:8000/ws/webRTC/room01/';*/
 //const TURN_SERVER_URL = 'api-rest-teleasistencia-p1.iesvjp.es:3478';
 //const TURN_SERVER_USERNAME = 'username';
 //const TURN_SERVER_CREDENTIAL = 'credential';
@@ -36,18 +34,14 @@ const PC_CONFIG = {
 };
 
 //Uso de audio y/o vídeo.
-let audioVideo = { audio: true, video: false }
+let audioVideo = { audio: true, video: true }
 let joinRoom = document.querySelector("#joinRoom");
 let video = document.querySelector("input[name=video]:checked").value;
 
 
 /************************* Socket ******************/
-let socket;
-let sendData = (data) => {
-    socket.send(data);
-};
-/*let socket = io(SIGNALING_SERVER_URL, { autoConnect: false });
 
+let socket = io(SIGNALING_SERVER_URL, { autoConnect: false });
 
 socket.on('data', (data) => {
     console.log('Data received: ',data);
@@ -63,7 +57,7 @@ socket.on('ready', () => {
 
 let sendData = (data) => {
     socket.emit('data', data);
-};*/
+};
 
 /************************* WebRTC ******************/
 let pc;
@@ -79,37 +73,7 @@ let getLocalStream = () => {
             localStream = stream;
             localStreamElement.srcObject = stream;
             // Connect after making sure that local stream is availble
-
-/*
             socket.connect();
-*/
-
-            socket = new WebSocket(SIGNALING_SERVER_URL);
-
-            socket.onopen = (data) => {
-                console.log('Ready');
-                createPeerConnection();
-                sendOffer();
-            }
-
-            socket.onmessage =  (data) => {
-                console.log('Data received: ',data);
-                handleSignalingData(data);
-            }
-
-            socket.onclose = function(event) {
-                if (event.wasClean) {
-                    alert(`[close] Conexión cerrada limpiamente, código=${event.code} motivo=${event.reason}`);
-                } else {
-                    // ej. El proceso del servidor se detuvo o la red está caída
-                    // event.code es usualmente 1006 en este caso
-                    alert('[close] La conexión se cayó');
-                }
-            };
-
-            socket.onerror = function(error) {
-                alert(`[error]`);
-            };
         })
         .catch(error => {
             console.error('Stream not found: ', error);
@@ -171,8 +135,6 @@ let handleSignalingData = (data) => {
 
     //Añadimos esto para el ejemplo de WS creado en django
     console.log(data);
-    console.log(data.data);
-    data = JSON.parse(data.data);
 
     // Esto funcionaría usando el ejemplo que nos dan
     switch (data.type) {
